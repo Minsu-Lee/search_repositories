@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SearchRepositories</string>
+    <string name="empty_search_keyword">검색어를 입력해주세요.</string>
+</resources>
