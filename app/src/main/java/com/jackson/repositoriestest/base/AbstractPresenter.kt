@@ -1,6 +1,5 @@
 package com.jackson.repositoriestest.base
 
-import android.util.Log
 import com.jackson.repositoriestest.utils.DLog
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -13,7 +12,6 @@ abstract class AbstractPresenter<VIEW: BaseView>: BasePresenter<VIEW> {
 
     override fun attachView(view: VIEW) {
         this.view = view
-        Log.e("","")
     }
 
     override fun detachView() {
@@ -22,7 +20,9 @@ abstract class AbstractPresenter<VIEW: BaseView>: BasePresenter<VIEW> {
     }
 
     override fun handleError(error: Throwable) {
-        DLog.e("handleError", "error: ${error.printStackTrace()}")
+        error.printStackTrace()
+        view?.onInvisibleProgress()
+        DLog.e("handleError", "error: ${error.message}")
     }
 
     fun addDisposable(disposable: Disposable?) {

@@ -26,7 +26,7 @@ abstract class BaseActivity<in VIEW: BaseView, P: BasePresenter<VIEW>>: AppCompa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter = onCreatePresenter()
-        presenter?.attachView(this as VIEW) // 아래 선언된 onVisibleProgress, onInvisibleProgress 등 VIEW에도 동일하게 적용됨
+        presenter?.attachView(this as VIEW)
         mProgressView = NetworkProgressDialog.getInstance(this@BaseActivity)
         with(layout) {
             setContentView(createView(AnkoContext.create(this@BaseActivity, this@BaseActivity)))

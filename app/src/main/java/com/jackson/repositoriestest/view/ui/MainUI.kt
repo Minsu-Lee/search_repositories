@@ -1,4 +1,4 @@
-package com.jackson.repositoriestest.view.main.ui
+package com.jackson.repositoriestest.view.ui
 
 import android.app.Activity
 import android.graphics.Color

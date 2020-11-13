@@ -2,6 +2,7 @@ package com.jackson.repositoriestest.presenter
 
 import com.jackson.repositoriestest.base.BasePresenter
 import com.jackson.repositoriestest.base.BaseView
+import com.jackson.repositoriestest.model.RepositoriesResponse
 
 interface MainConstract {
 
@@ -15,7 +16,7 @@ interface MainConstract {
         /**
          * RecyclerView 데이터 갱신
          */
-        fun initRepositoriesAdapter(data: ArrayList<Any>?)
+        fun initRepositoriesAdapter(data: RepositoriesResponse)
 
     }
 
