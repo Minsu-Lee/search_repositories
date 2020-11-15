@@ -14,12 +14,12 @@ data class RepositoriesLicense (
     var name: String = "",
 
     @SerializedName("spdx_id")
-    var spdx_id: String = "",
+    var spdxId: String = "",
 
     @SerializedName("url")
     var url: String = "",
 
     @SerializedName("node_id")
-    var node_id: String = ""
+    var nodeId: String = ""
 
 ): Parcelable

@@ -17,10 +17,7 @@ interface GithubApiService {
      * @Query("page") page: Int,
      * @Query("per_page") perPage: Int
      */
-    @Headers(
-        "Authorization: BEARER ${BuildConfig.GIT_TOKEN}",
-        "Content-Type: application/json"
-    )
+    @Headers("Authorization: BEARER ${BuildConfig.GIT_TOKEN}")
     @GET(ApiUrl.SEARCH_REPOSITORIES)
     fun searchRepositories(@QueryMap params: HashMap<String, Any?>): Observable<RepositoriesResponse>
 

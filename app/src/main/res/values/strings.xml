@@ -1,4 +1,7 @@
 <resources>
-    <string name="app_name">SearchRepositories</string>
-    <string name="empty_search_keyword">검색어를 입력해주세요.</string>
+    <string name="app_name">Repository</string>
+    <string name="search_repositories_hint">저장소 검색</string>
+    <string name="empty_search_keyword">입력된 검색 키워드를 확인해주세요.</string>
+    <string name="check_network_msg">네트워크 연결을 확인해주시길 바랍니다.</string>
+    <string name="back_press_str">\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.</string>
 </resources>

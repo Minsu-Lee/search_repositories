@@ -42,7 +42,9 @@ object NetworkManager {
 
                 val builder = chain.request().newBuilder()
                     // .addHeader("Authorization", "BEARER ${BuildConfig.GIT_TOKEN}")
-                    .addHeader("Accept", "application/json").build()
+                    .addHeader("Accept", "application/vnd.github.v3+json")
+                    .addHeader("Content-Type", "Content-Type: application/json; charset=utf8")
+                    .build()
 
                 chain.proceed(builder)
             }.let { builder ->

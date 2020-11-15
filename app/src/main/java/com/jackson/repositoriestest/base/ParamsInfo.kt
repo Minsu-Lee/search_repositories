@@ -1,4 +1,4 @@
-package com.jackson.repositoriestest
+package com.jackson.repositoriestest.base
 
 object ParamsInfo {
 

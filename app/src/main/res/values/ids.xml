@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="repositories_search_btn" type="id"/>
+    <item name="repositories_license_tv" type="id"/>
+    <item name="webview_back_btn" type="id"/>
+    <item name="webview_close_btn" type="id"/>
 </resources>
