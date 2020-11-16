@@ -1,6 +1,6 @@
 package com.jackson.repositories.http
 
-import com.jackson.repositories.AppConst
+import com.jackson.repositories.BuildConfig
 import com.jackson.repositories.model.RepositoriesResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -18,7 +18,7 @@ interface GithubApiService {
      * @Query("per_page") perPage: Int
      */
     @Headers(
-        "Authorization: BEARER ${AppConst.GIT_TOKEN}",
+        "Authorization: BEARER ${BuildConfig.GIT_TOKEN}",
         "Content-Type: application/json"
     )
     @GET(ApiUrl.SEARCH_REPOSITORIES)

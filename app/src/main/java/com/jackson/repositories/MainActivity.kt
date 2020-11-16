@@ -83,7 +83,7 @@ class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConst
     override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
         when (actionId) {
             EditorInfo.IME_ACTION_SEARCH -> clickSearchIcon()
-            else -> return false // 기본 엔터키 동작
+            else -> return false
         }
         return true
     }

@@ -4,6 +4,10 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
+def gradlePropertiesFile = rootProject.file("gradle.properties")
+def gradleProperties = new Properties()
+gradleProperties.load(new FileInputStream(gradlePropertiesFile))
+
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.2"
@@ -15,6 +19,7 @@ android {
         versionCode 1
         versionName "1.0.0"
 
+        buildConfigField("String", "GIT_TOKEN", gradleProperties['github.token'])
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
