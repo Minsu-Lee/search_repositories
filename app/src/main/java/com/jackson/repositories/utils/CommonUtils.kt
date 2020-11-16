@@ -5,7 +5,7 @@ import com.jackson.repositories.AppConst
 object CommonUtils {
 
     /**
-     * 공백을 기준으로 단어를 나누고, Query 데이터 양식에 맞춰 '+' 기호 삽입 후 가공된 Query를 반환합니다.
+     * 공백을 기준으로 키워드를 판단하고, Query 데이터 양식에 맞춰 공백 대신 '+' 기호로 치환 후 가공된 Query를 반환합니다.
      */
     fun makeQueryParams(queryStr: String): String {
         return StringBuffer().apply {

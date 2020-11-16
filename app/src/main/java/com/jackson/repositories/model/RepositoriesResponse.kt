@@ -11,6 +11,9 @@ data class RepositoriesResponse (
     var totalCount: Int = 0,
 
     @SerializedName("incomplete_results")
-    var incompleteResults: Boolean
+    var incompleteResults: Boolean,
+
+    @SerializedName("items")
+    var items: ArrayList<RepositoriesData>
 
 ): Parcelable

@@ -1,7 +1,9 @@
 package com.jackson.repositories.http
 
+import com.jackson.repositories.BuildConfig
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.security.GeneralSecurityException
@@ -33,12 +35,21 @@ object NetworkManager {
             .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor { chain ->
 
+                // 공통 헤더 명시
+                // github api header 참조 : https://developer.github.com/v3/media/
                 val builder = chain.request().newBuilder()
                     // .addHeader("Authorization", "BEARER ${BuildConfig.GIT_TOKEN}")
-                    .addHeader("Accept", "application/json").build()
+                    .addHeader("Accept", "application/vnd.github.v3+json").build()
+
 
                 chain.proceed(builder)
             }.let { builder ->
+
+                if (BuildConfig.DEBUG) {
+                    builder.addInterceptor(HttpLoggingInterceptor().apply {
+                        level = HttpLoggingInterceptor.Level.BODY
+                    })
+                }
 
                 client = builder.build()
 
@@ -53,6 +64,12 @@ object NetworkManager {
             }
     }
 
+    /**
+     * https 통신 시, 모든 url을 신뢰하도록 설정
+     * 특정 url의 ssl 인증키가 존재할경우 아래 링크 참조
+     * https://jeongupark-study-house.tistory.com/81
+     * # ssl관련 참조 : https://m.blog.naver.com/ucert/221255128642
+     */
     private fun configureClient(builder: OkHttpClient.Builder): OkHttpClient.Builder {
         arrayOf<TrustManager>(object : X509TrustManager {
             override fun checkClientTrusted(p0: Array<out X509Certificate>?, p1: String?) {}
