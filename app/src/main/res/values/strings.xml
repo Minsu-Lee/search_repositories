@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Repositories</string>
-    <string name="empty_search_keyword">검색어를 입력해주세요.</string>
+    <string name="search_repositories_hint">저장소 검색</string>
+    <string name="empty_search_keyword">입력된 검색 키워드를 확인해주세요.</string>
 </resources>

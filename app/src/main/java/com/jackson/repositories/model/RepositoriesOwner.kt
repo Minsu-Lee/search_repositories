@@ -14,51 +14,51 @@ data class RepositoriesOwner (
     var id: Int = -1,
 
     @SerializedName("node_id")
-    var node_id: String = "",
+    var nodeId: String = "",
 
     @SerializedName("avatar_url")
-    var avatar_url: String = "",
+    var avatarUrl: String = "",
 
     @SerializedName("gravatar_id")
-    var gravatar_id: String = "",
+    var gravatarId: String = "",
 
     @SerializedName("url")
     var url: String = "",
 
     @SerializedName("html_url")
-    var html_url: String = "",
+    var htmlUrl: String = "",
 
     @SerializedName("followers_url")
-    var followers_url: String = "",
+    var followersUrl: String = "",
 
     @SerializedName("following_url")
-    var following_url: String = "",
+    var followingUrl: String = "",
 
     @SerializedName("gists_url")
-    var gists_url: String = "",
+    var gistsUrl: String = "",
 
     @SerializedName("starred_url")
-    var starred_url: String = "",
+    var starredUrl: String = "",
 
     @SerializedName("subscriptions_url")
-    var subscriptions_url: String = "",
+    var subscriptionsUrl: String = "",
 
     @SerializedName("organizations_url")
-    var organizations_url: String = "",
+    var organizationsUrl: String = "",
 
     @SerializedName("repos_url")
-    var repos_url: String = "",
+    var reposUrl: String = "",
 
     @SerializedName("events_url")
-    var events_url: String = "",
+    var eventsUrl: String = "",
 
     @SerializedName("received_events_url")
-    var received_events_url: String = "",
+    var receivedEventsUrl: String = "",
 
     @SerializedName("type")
     var type: String = "",
 
     @SerializedName("site_admin")
-    var site_admin: Boolean
+    var siteAdmin: Boolean
 
 ): Parcelable
