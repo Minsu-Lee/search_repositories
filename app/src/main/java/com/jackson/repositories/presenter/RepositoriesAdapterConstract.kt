@@ -12,7 +12,7 @@ interface RepositoriesAdapterConstract {
     interface Model {
         fun initData(list: ArrayList<RepositoriesData>)
         fun addAllData(list: ArrayList<RepositoriesData>)
-        fun clear()
+        fun clear(): Boolean
     }
 
 }

@@ -17,7 +17,7 @@ class RepositoriesAdapter(val view: MainConstract.View): RecyclerView.Adapter<Re
     RepositoriesAdapterConstract.View, RepositoriesAdapterConstract.Model {
 
     companion object {
-        const val TAG = "BaseAdapter"
+        val TAG = javaClass.simpleName
         const val TYPE_ITEM_CARD = 100
         const val TYPE_EMPTY_CARD = -100
     }
@@ -72,11 +72,12 @@ class RepositoriesAdapter(val view: MainConstract.View): RecyclerView.Adapter<Re
         notifyItemRangeChanged(beforeSize, list.size)
     }
 
-    override fun clear() {
-        if (list.size > 0) {
+    override fun clear(): Boolean {
+        return if (list.size > 0) {
             list.clear()
             notifyAdapter()
-        }
+            true
+        } else false
     }
 
     override fun notifyAdapter() {

@@ -1,4 +1,4 @@
-package com.jackson.repositories
+package com.jackson.repositories.base
 
 object AppConst {
 
@@ -12,6 +12,6 @@ object AppConst {
 
     val QUERY_MAX_LENGTH = 256
 
-    const val GIT_TOKEN = "f6ebeef67c5157c0bc7573575e6635aec281a1d8"
+    val GITHUB_URL = "github_url"
 
 }

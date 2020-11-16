@@ -1,6 +1,6 @@
 package com.jackson.repositories.utils
 
-import com.jackson.repositories.AppConst
+import com.jackson.repositories.base.AppConst
 import java.text.DecimalFormat
 
 object CommonUtils {
