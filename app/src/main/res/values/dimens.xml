@@ -2,4 +2,5 @@
 <resources>
     <dimen name="repo_title_name">16dp</dimen>
     <dimen name="repo_etc_str">14dp</dimen>
+    <dimen name="empty_result_hint">16dp</dimen>
 </resources>

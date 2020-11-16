@@ -1,12 +1,17 @@
 package com.jackson.repositories
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.jackson.repositories.base.AppConst
 import com.jackson.repositories.base.DefaultDividerItemDecoration
 import com.jackson.repositories.base.ListMoreScrollListener
 import com.jackson.repositories.presenter.MainConstract
@@ -18,12 +23,13 @@ import com.jackson.repositories.base.safeViewLock
 import com.jackson.repositories.model.RepositoriesData
 import com.jackson.repositories.model.RepositoriesResponse
 import com.jackson.repositories.view.adapter.RepositoriesAdapter
-import com.jackson.repositories.view.ui.MainUI
+import com.jackson.repositories.view.activity.ui.MainUI
+import com.jackson.repositories.view.activity.webpage.GithubWebActivity
 import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.toast
 
-class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConstract.View, View.OnClickListener, TextView.OnEditorActionListener {
+class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConstract.View, View.OnClickListener, TextView.OnEditorActionListener, TextWatcher {
 
     companion object {
         val TAG: String = javaClass.simpleName
@@ -39,7 +45,12 @@ class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConst
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        overridePendingTransition(R.anim.stay, R.anim.stay)
         with(layout as MainUI) {
+
+            // 안내문구 상태
+            initListGuideStatus()
+
             RepositoriesAdapter(this@MainActivity).let { adapter ->
                 mRepoAdapter = adapter
 
@@ -52,6 +63,7 @@ class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConst
                 rv.adapter = adapter
             }
 
+            mSearchEt.addTextChangedListener(this@MainActivity)
             mSearchEt.setOnEditorActionListener(this@MainActivity)
             mSearchBtn.setOnClickListener(this@MainActivity)
 
@@ -64,7 +76,7 @@ class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConst
     }
 
     /**
-     * 검색버튼 클릭 or 엔터
+     * 검색 API 호출
      */
     private fun searchRepositories(page: Int = AppConst.PAGE_FIRST_VALUE, rows: Int = AppConst.PER_PAGE_DEFAULT) {
         with(layout as MainUI) {
@@ -90,12 +102,17 @@ class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConst
     override fun moreSearchRepositories(nextPage: Int) = searchRepositories(page + 1)
 
     /**
-     * View ) Repositories API 응답부
+     * Repositories API 응답부
      */
     override fun responseRepositoriesData(data: RepositoriesResponse, curPage: Int) {
         with(layout as MainUI) {
+
             // 검색 버튼 활성화
             mSearchBtn.safeViewLock(false)
+
+            // 안내문구 상태
+            initListGuideStatus(data.items.size)
+
             DLog.e(TAG, "response repositories [$query]")
             if (curPage == AppConst.PAGE_FIRST_VALUE) {
                 initScrollListener(data.totalCount)
@@ -109,7 +126,36 @@ class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConst
      * 웹뷰에 저장소 링크를 호출
      */
     override fun openRepositories(data: RepositoriesData) {
-        toast(data.htmlUrl)
+        // toast(data.htmlUrl)
+        Handler().postDelayed({
+            Intent(this@MainActivity, GithubWebActivity::class.java).apply {
+                putExtra(AppConst.GITHUB_URL, data.htmlUrl)
+            }.let {  intent ->
+                startActivity(intent)
+            }
+        }, 300)
+    }
+
+    /**
+     * 결과 유무에 따른 가이드 문구 노출
+     */
+    override fun initListGuideStatus(itemSize: Int) = with(layout as MainUI) {
+        when {
+            itemSize > 0 -> {
+                rv.visibility = View.VISIBLE
+                mGuidePhrase.visibility = View.GONE
+            }
+            itemSize == 0 -> {
+                rv.visibility = View.GONE
+                mGuidePhrase.visibility = View.VISIBLE
+                mGuideTv.text = getString(R.string.search_empty_str)
+            }
+            else -> {
+                rv.visibility = View.GONE
+                mGuidePhrase.visibility = View.VISIBLE
+                mGuideTv.text = getString(R.string.search_guide_phrase)
+            }
+        }
     }
 
     /**
@@ -145,6 +191,33 @@ class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConst
             else -> return false
         }
         return true
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+    override fun afterTextChanged(p0: Editable?) {
+        with(layout as MainUI) {
+
+            // page 초기화
+            page = AppConst.PAGE_FIRST_VALUE
+            rows = AppConst.PER_PAGE_DEFAULT
+            // 안내문구 상태
+            initListGuideStatus()
+            // 데이터 초기화
+            mRepoAdapter.clear()
+            // 입력값 비울 시, 키보드 내리기
+            if (mSearchEt.text.isEmpty()) {
+                DeviceUtils.hideKeyboard(this@MainActivity, mSearchEt)
+            }
+        }
+    }
+
+    /**
+     * 뒤로가기 시도 시, toast 문구 노출
+     */
+    override fun onBackPressed() {
+        // super.onBackPressed()
+        backPressHandler?.onBackPressed()
     }
 
 }

@@ -17,7 +17,10 @@ interface MainConstract {
          * 특정 위치로 스크롤 시, 다음 페이지 API 호출
          */
         fun moreSearchRepositories(nextPage: Int)
-
+        /**
+         * 결과 유무 ( 리스트 노출 여부, 없을 시 가이드 문구 노출 )
+         */
+        fun initListGuideStatus(itemSize: Int = -1)
 
         /* API 응답 호출 부 */
         fun responseRepositoriesData(data: RepositoriesResponse, page: Int) { }
@@ -28,6 +31,9 @@ interface MainConstract {
 
     interface Presenter: BasePresenter<View> {
 
+        /**
+         * Adapter의 View, Model
+         */
         var adapterView: RepositoriesAdapterConstract.View?
         var adapterModel: RepositoriesAdapterConstract.Model?
 

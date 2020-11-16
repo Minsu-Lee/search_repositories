@@ -1,13 +1,17 @@
-package com.jackson.repositories.view.ui
+package com.jackson.repositories.view.activity.ui
 
 import android.app.Activity
 import android.graphics.Color
 import android.text.InputType
+import android.util.TypedValue
 import android.view.Gravity
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.jackson.repositories.R
 import com.jackson.repositories.base.WrapContentLayoutManager
@@ -21,6 +25,10 @@ class MainUI: AnkoComponent<Activity> {
     lateinit var mSearchBtn: LinearLayout
 
     lateinit var rv: RecyclerView
+
+    lateinit var mGuidePhrase: LinearLayout
+
+    lateinit var mGuideTv: TextView
 
     override fun createView(ui: AnkoContext<Activity>) = with(ui) {
         verticalLayout {
@@ -63,8 +71,23 @@ class MainUI: AnkoComponent<Activity> {
             }.lparams(width= matchParent, height= wrapContent)
 
             rv = recyclerView {
+                visibility = View.GONE
                 backgroundColor = Color.WHITE
                 layoutManager = WrapContentLayoutManager(ctx, RecyclerView.VERTICAL, false)
+            }.lparams(width= matchParent, height=0, weight = 1f)
+
+            mGuidePhrase = verticalLayout {
+                visibility = View.VISIBLE
+                backgroundColor = Color.WHITE
+                gravity = Gravity.CENTER
+
+                mGuideTv = textView(R.string.search_guide_phrase) {
+                    setTextSize(TypedValue.COMPLEX_UNIT_PX, resources.getDimension(R.dimen.empty_result_hint))
+                    textColor = Color.parseColor("#586069")
+                    typeface = ResourcesCompat.getFont(context, R.font.barlow_medium)
+                    gravity = Gravity.CENTER
+                }.lparams(width= wrapContent, height= wrapContent)
+
             }.lparams(width= matchParent, height=0, weight = 1f)
 
         }

@@ -1,6 +1,6 @@
 package com.jackson.repositories.presenter
 
-import com.jackson.repositories.AppConst
+import com.jackson.repositories.base.AppConst
 import com.jackson.repositories.ParamsInfo
 import com.jackson.repositories.base.AbstractPresenter
 import com.jackson.repositories.http.NetworkManager
