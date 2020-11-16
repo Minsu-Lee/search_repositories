@@ -48,6 +48,7 @@ class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConst
         overridePendingTransition(R.anim.stay, R.anim.stay)
         with(layout as MainUI) {
 
+            initTitleItemSize()
             // 안내문구 상태
             initListGuideStatus()
 
@@ -71,6 +72,17 @@ class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConst
             presenter?.run {
                 adapterView = mRepoAdapter
                 adapterModel = mRepoAdapter
+            }
+        }
+    }
+
+    private fun initTitleItemSize(itemSize: Int = 0, totalSize: Int = 0) {
+        getString(R.string.app_name).let { appName ->
+            when {
+                itemSize > 0 && totalSize > 0 -> " ($itemSize/$totalSize)"
+                else -> ""
+            }.let { suffix ->
+                supportActionBar?.title = "$appName$suffix"
             }
         }
     }
@@ -110,6 +122,7 @@ class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConst
             // 검색 버튼 활성화
             mSearchBtn.safeViewLock(false)
 
+            initTitleItemSize(mRepoAdapter.itemCount, data.totalCount)
             // 안내문구 상태
             initListGuideStatus(data.items.size)
 

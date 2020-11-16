@@ -11,6 +11,8 @@ import com.jackson.repositories.base.BaseView
 import com.jackson.repositories.view.component.NetworkProgressDialog
 import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.AnkoContext
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 import java.util.*
 
 abstract class BaseActivity<in VIEW: BaseView, P: BasePresenter<VIEW>>: AppCompatActivity(), BaseView {
@@ -50,6 +52,20 @@ abstract class BaseActivity<in VIEW: BaseView, P: BasePresenter<VIEW>>: AppCompa
             Handler().postDelayed({
                 it.dismiss()
             }, DEFAULT_PROGRESS_TIME)
+        }
+    }
+
+    override fun toast(msgResId: Int, isLong: Boolean) {
+        applicationContext.let {
+            if (isLong) it.longToast(msgResId)
+            else it.toast(msgResId)
+        }
+    }
+
+    override fun toast(msgStr: String, isLong: Boolean) {
+        applicationContext.let {
+            if (isLong) it.longToast(msgStr)
+            else it.toast(msgStr)
         }
     }
 

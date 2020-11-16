@@ -1,6 +1,7 @@
 package com.jackson.repositories.base
 
 import android.os.Parcelable
+import androidx.annotation.StringRes
 
 interface BaseView {
 
@@ -9,5 +10,8 @@ interface BaseView {
     fun onVisibleProgress() { }
 
     fun onInvisibleProgress() { }
+
+    fun toast(msgStr: String, isLong: Boolean = false) {}
+    fun toast(@StringRes msgResId: Int, isLong: Boolean = false) {}
 
 }
