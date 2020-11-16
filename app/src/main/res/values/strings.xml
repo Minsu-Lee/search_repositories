@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Repository</string>
     <string name="search_repositories_hint">저장소 검색</string>
-    <string name="search_guide_phrase">저장소 키워드를 입력하고 검색버튼을 눌러주세요.\n공백을 기준으로 키워드로 간주합니다.\n( 최대 256자 )</string>
+    <string name="search_guide_phrase">저장소 키워드를 입력하고 검색버튼을 눌러주세요.\n공백을 기준으로 키워드를 간주합니다.\n( 최대 256자 )</string>
     <string name="search_empty_str">검색 결과가 존재하지 않습니다.</string>
     <string name="empty_search_keyword">입력된 검색 키워드를 확인해주세요.</string>
     <string name="check_network_msg">네트워크 연결을 확인해주시길 바랍니다.</string>
