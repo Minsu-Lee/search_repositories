@@ -1,6 +1,7 @@
 package com.jackson.repositories.utils
 
 import com.jackson.repositories.AppConst
+import java.text.DecimalFormat
 
 object CommonUtils {
 
@@ -22,5 +23,15 @@ object CommonUtils {
      */
     fun checkQueryLength(queryStr: String?, minLimit: Int = 0, maxLimit: Int = AppConst.QUERY_MAX_LENGTH): Boolean
             = queryStr?.let { it.isNotEmpty() && it.length in minLimit..maxLimit } ?: false
+
+    /**
+     * 1000 단위 이상 줄여서 표기
+     */
+    fun formatRep(rep: Int): String? {
+        return when {
+            rep < 1000 -> "$rep"
+            else -> DecimalFormat("#,###.#k").format(rep / 1000.0)
+        }
+    }
 
 }
