@@ -53,10 +53,16 @@ class MainPresenter: AbstractPresenter<MainConstract.View>(), MainConstract.Pres
                     }
                     override fun onError(e: Throwable) {
                         (e as? HttpException)?.response()?.let {
-                            if (it.code() == 422 && it.message().indexOf("Unprocessable Entity") >= 0) {
-                                DLog.e("TEST", it.message()) // 1000까지가 리밋
-                                view?.toast(R.string.api_limit_str)
+                            when (it.code()) {
+                                // 권한문제 또는 token 만료
+                                401 -> view?.toast(R.string.api_unauthorized_str)
+                                // 짧은 기간 내에 잘못된 자격 증명이있는 여러 요청을 감지
+                                403 -> view?.toast(R.string.api_max_req_str)
+                                // 422 Unprocessable Entity, 1000건 이상 결과를 호출하는 경우
+                                422 -> view?.toast(R.string.api_limit_str)
+                                else -> view?.toast("${it.code()} " + it.message())
                             }
+                            DLog.e("TEST", it.message())
                         }
                         handleError(e)
                     }

@@ -6,5 +6,7 @@
     <string name="empty_search_keyword">입력된 검색 키워드를 확인해주세요.</string>
     <string name="check_network_msg">네트워크 연결을 확인해주시길 바랍니다.</string>
     <string name="back_press_str">\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.</string>
+    <string name="api_unauthorized_str">Http 401 Unauthorized\nGit Token 권한에 문제가 있거나 만료되었습니다.</string>
+    <string name="api_max_req_str">Http 403 Forbidden\n최대 로그인 시도 횟수를 초과했습니다. 나중에 다시 시도하십시오.</string>
     <string name="api_limit_str">Http 422 Unprocessable Entity\nGitHub 검색 API는 각 검색에 대해 최대 1,000 개의 결과를 제공 합니다.</string>
 </resources>

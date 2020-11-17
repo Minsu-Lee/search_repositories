@@ -27,7 +27,6 @@ import com.jackson.repositories.view.activity.ui.MainUI
 import com.jackson.repositories.view.activity.webpage.GithubWebActivity
 import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.dip
-import org.jetbrains.anko.toast
 
 class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConstract.View, View.OnClickListener, TextView.OnEditorActionListener, TextWatcher {
 
