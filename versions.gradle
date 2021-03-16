@@ -1,5 +1,6 @@
 ext {
     kotlinVersion = '1.4.0'
+    koinVersion = '1.0.2'
     ankoVersion = "0.10.8"
     rxjava2Version = "2.0.1"
     retrofit2Version = "2.1.0"
@@ -17,6 +18,14 @@ def kotlin = [:]
 kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 lib.kotlin = kotlin
+
+/* Koin */
+def koin = [:]
+koin.core = "org.koin:koin-core:$koinVersion"
+koin.android = "org.koin:koin-android:$koinVersion"
+koin.architecture = "org.koin:koin-androidx-viewmodel:$koinVersion"
+koin.test = "org.koin:koin-test:$koinVersion"
+lib.koin = koin
 
 /* Anko */
 def anko = [:]

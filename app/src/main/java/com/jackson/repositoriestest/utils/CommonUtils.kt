@@ -1,7 +1,11 @@
 package com.jackson.repositoriestest.utils
 
+import android.content.Context
+import android.content.res.AssetManager
 import com.jackson.repositoriestest.base.AppConst
+import java.io.InputStream
 import java.text.DecimalFormat
+import java.util.*
 
 object CommonUtils {
 
@@ -36,6 +40,19 @@ object CommonUtils {
             rep < 1000 -> "$rep"
             else -> DecimalFormat("#,###.#k").format(rep / 1000.0)
         }
+    }
+
+    /**
+     * src > main > assets > properties 파일 참조 ( key : value )
+     */
+    fun getProperty(key: String, ctx: Context): String {
+        return Properties().apply {
+            ctx.assets.let { assetManager: AssetManager ->
+                assetManager.open("config.properties").let { inputStream: InputStream ->
+                    load(inputStream)
+                }
+            }
+        }.getProperty(key)
     }
 
 }

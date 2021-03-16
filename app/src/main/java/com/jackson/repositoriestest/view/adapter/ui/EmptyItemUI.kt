@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import org.jetbrains.anko.*
 
 class EmptyItemUI: AnkoComponent<ViewGroup> {
-
     override fun createView(ui: AnkoContext<ViewGroup>) = with(ui) {
         verticalLayout {
             lparams(width= matchParent, height= wrapContent) {
@@ -13,5 +12,4 @@ class EmptyItemUI: AnkoComponent<ViewGroup> {
             }
         }
     }
-
 }

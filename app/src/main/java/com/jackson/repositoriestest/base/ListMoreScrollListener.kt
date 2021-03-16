@@ -17,15 +17,15 @@ abstract class ListMoreScrollListener(var allItemCount: Int = 0) : RecyclerView.
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
 
-        recyclerView?.let {
+        with(recyclerView) {
 
-            when (it.layoutManager?.javaClass?.simpleName) {
+            when (layoutManager?.javaClass?.simpleName) {
                 /**
                  * LinearLayoutManager
                  */
                 LinearLayoutManager::class.java.simpleName,
                 WrapContentLayoutManager::class.java.simpleName -> {
-                    (it.layoutManager as LinearLayoutManager).apply {
+                    (layoutManager as LinearLayoutManager).apply {
 
                         val visibleItemCount = childCount                                                   // 화면에 보이는 아이템 갯수
                         val loadPreparationPosition = visibleItemCount * 10

@@ -25,9 +25,11 @@ import com.jackson.repositoriestest.view.adapter.RepositoriesAdapter
 import com.jackson.repositoriestest.view.component.DefaultDividerItemDecoration
 import com.jackson.repositoriestest.view.activity.ui.MainUI
 import com.jackson.repositoriestest.view.activity.webpage.GithubWebActivity
+import com.jackson.repositoriestest.viewModel.GithubViewModel
 import org.jetbrains.anko.AnkoComponent
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.toast
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConstract.View, View.OnClickListener, TextView.OnEditorActionListener, TextWatcher {
 
@@ -67,8 +69,13 @@ class MainActivity: BaseActivity<MainConstract.View, MainPresenter>(), MainConst
                 adapterView = mRepoAdapter
                 adapterModel = mRepoAdapter
             }
+
+            gitViewmodel.searchRepositories()
+
         }
     }
+
+    val gitViewmodel: GithubViewModel = getViewModel()
 
     /**
      * 검색버튼 클릭 or 엔터
