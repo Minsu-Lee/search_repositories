@@ -1,5 +1,5 @@
 # search_repositories
-과제테스트, Github v3, Search Repositories API를 활용하여    
+과제테스트), Github v3, Search Repositories API를 활용하여    
 간단한 검색 기능을 만들어 보았습니다.
 
 kotlin언어에 MVP 구조로 진행하였고, 라이브러리는     
